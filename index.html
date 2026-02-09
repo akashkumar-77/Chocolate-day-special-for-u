@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Chocolate Day Sushma Ji 🍫💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(135deg,#ffd6e8,#f9a8d4);
+  text-align:center;
+  overflow-x:hidden;
+}
+.hidden{display:none;}
+
+.card{
+  background:#fff;
+  width:330px;
+  margin:20px auto;
+  padding:25px;
+  border-radius:25px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.25);
+  position:relative;
+  z-index:2;
+}
+
+h1,h2,h3{
+  font-family:Pacifico;
+  color:#9d174d;
+}
+
+button{
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  background:#9d174d;
+  color:white;
+  font-size:15px;
+  margin-top:15px;
+  cursor:pointer;
+}
+
+/* GAME */
+#gameBox{
+  width:320px;
+  height:420px;
+  background:#fff;
+  border-radius:20px;
+  margin:auto;
+  position:relative;
+  overflow:hidden;
+}
+
+#basket{
+  width:90px;
+  height:30px;
+  background:#9d174d;
+  position:absolute;
+  bottom:10px;
+  left:115px;
+  border-radius:20px;
+}
+
+.fall{
+  position:absolute;
+  top:-40px;
+  font-size:22px;
+}
+
+/* ENVELOPE */
+.envelope{
+  width:160px;
+  height:100px;
+  background:#ff4d8d;
+  margin:20px auto;
+  border-radius:12px;
+  position:relative;
+  cursor:pointer;
+}
+.envelope:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:0;
+  height:0;
+  border-left:80px solid transparent;
+  border-right:80px solid transparent;
+  border-top:50px solid #ff87b2;
+}
+
+/* CHOCOLATES */
+.choco-grid{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+}
+
+.choco{
+  width:120px;
+  height:80px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#5a2d0c,#3b1d09);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 6px 15px rgba(0,0,0,0.3);
+}
+
+.big-heart{
+  font-size:90px;
+  animation:pulse 1.2s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+.lines p{
+  margin:6px 0;
+  color:#9d174d;
+  font-size:14px;
+}
+
+/* HEART SHOWER */
+.heart{
+  position:fixed;
+  top:-20px;
+  font-size:18px;
+  animation:fall linear forwards;
+  pointer-events:none;
+  z-index:1;
+}
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+  background:linear-gradient(135deg,#ff4d8d,#ff87b2);
+  margin-top:18px;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="front" class="card">
+  <h1>Happy Chocolate Day<br>Sushma Ji 🍫💖</h1>
+  <div style="font-size:60px;">🧸🍫</div>
+  <p style="color:#9d174d;">A surprise is waiting for you…</p>
+  <button onclick="startGame()">Start 💝</button>
+</div>
+
+<div id="game" class="hidden">
+  <h2>Score: <span id="score">0</span></h2>
+  <div id="gameBox">
+    <div id="basket"></div>
+  </div>
+</div>
+
+<div id="reward" class="card hidden">
+  <h2 id="rewardText"></h2>
+  <div style="font-size:60px;">🍫</div>
+  <button onclick="showEnvelope()">Next 💌</button>
+</div>
+
+<div id="envelopeBox" class="card hidden">
+  <div class="envelope" onclick="openLetter()"></div>
+  <p>Tap the pink envelope 💖</p>
+</div>
+
+<div id="letter" class="card hidden">
+  <h3>For You, Sushma Ji 💕</h3>
+  <div class="lines">
+    <p>1. You make my ordinary days feel special ✨</p>
+    <p>2. Your smile is sweeter than any chocolate 🍫</p>
+    <p>3. You calm my mind like Dairy Milk Silk 😌</p>
+    <p>4. You break my seriousness like KitKat ❤️</p>
+    <p>5. You feel luxurious like Ferrero Rocher 💎</p>
+    <p>6. You are addictive like my favorite chocolate 😘</p>
+    <p>7. You make happiness look effortless 💖</p>
+    <p>8. You are soft, warm, and comforting 🫶</p>
+    <p>9. You make my heart feel at home 🏡</p>
+    <p>10. You are my favorite surprise, always 💝</p>
+  </div>
+  <button onclick="openPick()">Pick a Chocolate 🍫</button>
+</div>
+
+<div id="pick" class="card hidden">
+  <h2>Please pick a chocolate 🍫</h2>
+  <div class="choco-grid">
+    <div class="choco" onclick="alert('You melt my heart like Dairy Milk 😌💖')">Dairy Milk</div>
+    <div class="choco" onclick="alert('You break my seriousness every time ❤️')">KitKat</div>
+    <div class="choco" onclick="alert('You are pure luxury ✨')">Ferrero</div>
+    <div class="choco" onclick="alert('You give me 5-Star energy 💫')">5 Star</div>
+  </div>
+  <button onclick="finalPage()">Next ❤️</button>
+</div>
+
+<div id="final" class="card hidden">
+  <div class="big-heart">❤️</div>
+  <p>
+    Thank you, Sushma Ji, for being the sweetest part of my life.
+    Just like chocolate, you slowly became my favorite addiction —
+    comforting, exciting, and impossible to replace. 🍫💖
+  </p>
+  <button onclick="nextSurprise()" style="background:#ff4d8d;">
+    Next Surprise 💖
+  </button>
+</div>
+
+<div id="next" class="card hidden">
+  <div class="big-heart">💖</div>
+  <h1>Sushma Ji</h1>
+  <p>Today was just a small taste… 🍫</p>
+  <p>The real sweetness is still waiting for you 💕</p>
+  <button onclick="reveal()">Tap for a hint ✨</button>
+</div>
+
+<script>
+const front = document.getElementById("front");
+const game = document.getElementById("game");
+const reward = document.getElementById("reward");
+const rewardText = document.getElementById("rewardText");
+const envelopeBox = document.getElementById("envelopeBox");
+const letter = document.getElementById("letter");
+const pick = document.getElementById("pick");
+const finalPageBox = document.getElementById("final");
+const nextBox = document.getElementById("next");
+const scoreEl = document.getElementById("score");
+const basket = document.getElementById("basket");
+const box = document.getElementById("gameBox");
+
+let score = 0, running = false, interval;
+
+/* HEART SHOWER */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerText=Math.random()>0.5?"❤️":"💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=3+Math.random()*3+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},300);
+
+function startGame(){
+  front.classList.add("hidden");
+  game.classList.remove("hidden");
+  score = 0;
+  scoreEl.innerText = 0;
+  running = true;
+  interval = setInterval(dropItem, 900);
+}
+
+document.addEventListener("mousemove",e=>{
+  if(!running) return;
+  basket.style.left = (e.clientX - box.offsetLeft - 45) + "px";
+});
+
+document.addEventListener("touchmove",e=>{
+  if(!running) return;
+  basket.style.left = (e.touches[0].clientX - box.offsetLeft - 45) + "px";
+});
+
+function dropItem(){
+  if(!running) return;
+  const el=document.createElement("div");
+  el.className="fall";
+  el.innerText=["Sushma 💖","❤️","🍫"][Math.floor(Math.random()*3)];
+  el.style.left=Math.random()*240+"px";
+  box.appendChild(el);
+
+  let y=-40;
+  const fall=setInterval(()=>{
+    y+=4;
+    el.style.top=y+"px";
+    const b=basket.getBoundingClientRect();
+    const r=el.getBoundingClientRect();
+    if(r.bottom>b.top && r.left<b.right && r.right>b.left){
+      score++;
+      scoreEl.innerText=score;
+      el.remove();
+      clearInterval(fall);
+    }
+    if(y>420){
+      clearInterval(fall);
+      el.remove();
+      gameOver();
+    }
+  },20);
+}
+
+function gameOver(){
+  running=false;
+  clearInterval(interval);
+  game.classList.add("hidden");
+  rewardText.innerText = score<=1?"Dairy Milk 🍫":score<=3?"KitKat 🍫":score<=5?"Ferrero 🍫":"Dark Chocolate 🖤";
+  reward.classList.remove("hidden");
+}
+
+function showEnvelope(){ reward.classList.add("hidden"); envelopeBox.classList.remove("hidden"); }
+function openLetter(){ envelopeBox.classList.add("hidden"); letter.classList.remove("hidden"); }
+function openPick(){ letter.classList.add("hidden"); pick.classList.remove("hidden"); }
+function finalPage(){ pick.classList.add("hidden"); finalPageBox.classList.remove("hidden"); }
+function nextSurprise(){ finalPageBox.classList.add("hidden"); nextBox.classList.remove("hidden"); }
+
+function reveal(){
+  nextBox.innerHTML=`
+  <div class="big-heart">❤️</div>
+  <h1>Just a Little Hint 😌</h1>
+  <p>Tomorrow is not about chocolates… it’s about <b>you</b> 💖</p>
+  <p>Sleep with a smile 🌙 Tomorrow… I’ve got you ❤️</p>
+  <button class="close-btn" onclick="closeLove()">Close with Love 💕</button>`;
+}
+
+function closeLove(){
+  document.body.innerHTML="<h1 style='margin-top:40vh;color:#9d174d;font-family:Pacifico;'>Good Night Sushma Ji 💖</h1>";
+}
+</script>
+
+</body>
+</html>
